@@ -3,7 +3,7 @@
 .RData
 .Ruserdata
 .DS_Store
-*/data-raw/*
+*/raw-data/*
 */outputs/*
 .Rdata
 .httr-oauth
