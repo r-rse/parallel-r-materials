@@ -12,10 +12,13 @@
 #' `<LSOA_code>_<LSOA_name>_<date_created>.png`
 plot_lad_map <- function(plot_data, out_dir) {
 
-    tictoc::tic()
+  tictoc::tic()
 
   lad_code <- unique(plot_data$lad_code)
   lad_name <- unique(plot_data$lad_name)
+
+  pid <- Sys.getpid()
+  node <- system2('hostname', stdout = TRUE)
 
   # Create facet plot maps of percentage occurrence of each category across each LSOA.
   plt_1 <- plot_data %>%
@@ -93,8 +96,8 @@ plot_lad_map <- function(plot_data, out_dir) {
     ),
     bottom = text_grob(
       paste("A) Percentage occurrence of General health category",
-        "B) Deviation of percentage occurence from General Health Category National Mean (z-score)",
-        "C) Most common health category (opacity reflects percentage occurence of top category)",
+        "B) Deviation of percentage occurrence from General Health Category National Mean (z-score)",
+        "C) Most common health category (opacity reflects percentage occurrence of top category)",
         sep = "\n"
       ),
       just = c("left", "top"), x = 0.01, y = 0.99, face = "italic", size = 10, lineheight = 1.15
@@ -113,8 +116,9 @@ plot_lad_map <- function(plot_data, out_dir) {
     bg = "white"
   )
 
-  cli::cli_alert_success(c("Map for LAD {.val {lad_code} {lad_name}} completed ",
-                           "successfuly on PID {.val {Sys.getpid()}} ",
-                           "({tictoc::toc(quiet = TRUE)$callback_msg})"))
+  cli::cli_alert_success(c(
+    "Map for LAD {.val {lad_code} {lad_name}} completed ",
+    "successfuly on PID {.val {pid}} on {node} ",
+    "({tictoc::toc(quiet = TRUE)$callback_msg})"
+  ))
 }
-

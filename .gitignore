@@ -10,3 +10,6 @@
 health_data/data/lsoa_boundaries.geojson
 health_data/data/lsoa_boundaries.geojson.gz
 attic/*
+appendices/*
+.binder/
+slurm/*
