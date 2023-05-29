@@ -28,9 +28,8 @@ R.utils::gunzip("<path-to-materials>/health_data/data/lsoa_boundaries.geojson.gz
 
 ## Atrributions
 
-### Digital boundaries and reference maps:
+### ONS Data, digital boundaries and reference maps:
 
-Digital boundary products and reference maps are supplied under the Open Government Licence. You must use the following copyright statements when you reproduce or use this material:
 
 - Source: Office for National Statistics licensed under the Open Government Licence v.3.0
 - Contains OS data © Crown copyright and database right [2023]

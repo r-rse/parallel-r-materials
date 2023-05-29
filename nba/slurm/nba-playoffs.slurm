@@ -2,9 +2,9 @@
 
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=2
-#SBATCH --mem-per-cpu=4G
+#SBATCH --mem-per-cpu=500
 #SBATCH --job-name=nba-playoffs
-#SBATCH --time=00:15:00
+#SBATCH --time=00:03:00
 #SBATCH --output=logs/R-%x.%j.out
 #SBATCH --error=logs/R-%x.%j.err
 #SBATCH --export=ALL,TZ=Europe/London

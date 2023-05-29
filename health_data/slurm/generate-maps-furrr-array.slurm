@@ -13,7 +13,7 @@
 
 
 # send mail to this address
-#SBATCH --mail-user=annakrystalli@googlemail.com
+#SBATCH --mail-user=youremail@here.com
 
 module load gdal/3.0.1
 module load proj/6.1.1

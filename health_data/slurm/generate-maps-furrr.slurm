@@ -10,7 +10,7 @@
 #SBATCH --export=ALL,TZ=Europe/London
 #SBATCH --mail-type=ALL
 # send mail to this address
-#SBATCH --mail-user=<your.email@here.com>
+#SBATCH --mail-user=your.email@here.com
 
 module load gdal/3.0.1
 module load proj/6.1.1
