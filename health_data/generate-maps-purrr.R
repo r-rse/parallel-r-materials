@@ -64,15 +64,15 @@ all_data <- all_data %>%
   mutate(z_score = (obs_perc - mean(obs_perc)) / sd(obs_perc)) %>%
   ungroup()
 
-# Create maps ----
-# Set iteration indexes
+# Create iteration indexes ----
 idx_start <- 1
 idx_end <- 5
 idx <- idx_start:idx_end
 
-# Split and subset data
+# Split and subset data ----
 split_data <- split(all_data, f = all_data$lad_code)[idx]
 
+# Create maps ----
 # Iterate plotting function over each LAD plot data chunk in idx
 tictoc::tic()
 purrr::walk(
@@ -81,5 +81,5 @@ purrr::walk(
 )
 
 cli::cli_h1("Job Complete")
-cli::cli_alert_success("{length(idx_start:idx_end)} map{?s} written to {.path {out_dir}}.")
+cli::cli_alert_success("{length(idx)} map{?s} written to {.path {out_dir}}.")
 cli::cli_h2("Total time elapsed: {.val {tictoc::toc(quiet = TRUE)$callback_msg}}")
