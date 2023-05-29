@@ -11,7 +11,7 @@
 #SBATCH --mail-type=ALL
 
 # send mail to this address
-#SBATCH --mail-user=annakrystalli@googlemail.com
+#SBATCH --mail-user=youremail@here.com
 
 module load R/4.2.1
 module load openmpi/4.1.4/intel
