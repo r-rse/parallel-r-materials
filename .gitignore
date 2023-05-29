@@ -13,3 +13,4 @@ attic/*
 appendices/*
 .binder/
 slurm/*
+*future_apply*

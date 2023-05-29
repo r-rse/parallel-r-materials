@@ -22,9 +22,8 @@ qualified_confs <- lapply(
 cli::cli_h2("ALL Qualifying matches COMPLETE!")
 
 # Play Conference Rounds ----
-
-
 cli::cli_h1("Conference Rounds have begun!")
+
 conf_winners <- lapply(
     X = qualified_confs,
     FUN = play_conference,
