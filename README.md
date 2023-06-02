@@ -26,10 +26,16 @@ To unzip the downloaded the zipped geojson file use:
 R.utils::gunzip("<path-to-materials>/health_data/data/lsoa_boundaries.geojson.gz")
 ```
 
-## Atrributions
+## Attributions
+
 
 ### ONS Data, digital boundaries and reference maps:
 
-
 - Source: Office for National Statistics licensed under the Open Government Licence v.3.0
 - Contains OS data © Crown copyright and database right [2023]
+
+For more details, check the [course materials](https://r-rse-parallel-r.netlify.app/04b_health_maps.html#exercise-materials)
+
+### NBA playoffs data
+
+- Accessed via [nbastatR](https://github.com/abresler/nbastatR) 📦
