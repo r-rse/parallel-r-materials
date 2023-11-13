@@ -12,18 +12,11 @@ To install the course materials, use:
 usethis::use_course("r-rse/parallel-r-materials")
 ```
 
-To download the large zipped geojson file from GitHub LFS use:
-```r
-# install.packages("piggyback")
-piggyback::pb_download(repo = "r-rse/parallel-r-materials",
-                       file = "lsoa_boundaries.geojson.gz",
-                       dest = "<path-to-materials>/health_data/data")
-```
-To unzip the downloaded the zipped geojson file use:
+Once the project is launched, to unzip the larger zipped geojson file use:
 
 ```r
 # install.packages("R.utils")
-R.utils::gunzip("<path-to-materials>/health_data/data/lsoa_boundaries.geojson.gz")
+R.utils::gunzip("health_data/data/lsoa_boundaries.geojson.gz")
 ```
 
 ## Attributions
