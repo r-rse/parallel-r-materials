@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The repository contains course materials associated with the course [Parallel R Workflows](https://r-rse-parallel-r.netlify.app/) developed by [`r-rse`](https://www.r-rse.eu/) for the University of Southampton. 
+The repository contains course materials associated with the course [Parallel R Workflows](https://parallel-r.netlify.app/) developed by [`r-rse`](https://www.r-rse.eu/) for the University of Southampton. 
 
 To install the course materials, use:
 ```r
