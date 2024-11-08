@@ -1,4 +1,3 @@
-
 #' Plot General Health Category maps
 #'
 #' Plots multiple maps of metrics associated with LSOA level ONS General Health
@@ -11,14 +10,13 @@
 #' by `output_dir`. The output file name for each PNG matches the pattern:
 #' `<LSOA_code>_<LSOA_name>_<date_created>.png`
 plot_lad_map <- function(plot_data, out_dir) {
-
   tictoc::tic()
 
   lad_code <- unique(plot_data$lad_code)
   lad_name <- unique(plot_data$lad_name)
 
   pid <- Sys.getpid()
-  node <- system2('hostname', stdout = TRUE)
+  node <- system2("hostname", stdout = TRUE)
 
   # Create facet plot maps of percentage occurrence of each category across each LSOA.
   plt_1 <- plot_data %>%

@@ -32,7 +32,6 @@ play_conference <- function(qualified, nba_stats) {
 #' @return returns a list of the round winners of each match. Match logs are also
 #' compiled and appended to the input's logs as attribute `match_logs` of the output
 play_round <- function(teams, nba_stats, round_name = NULL, seed = TRUE) {
-
   # Detect round name from number of teams
   if (is.null(round_name)) {
     round_id <- as.character(length(teams))
