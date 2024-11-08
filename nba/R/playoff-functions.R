@@ -110,7 +110,7 @@ play_match <- function(matchup, nba_stats, round_name) {
   }
 
   pid <- Sys.getpid()
-  node <- system2("hostname", stdout = TRUE)
+  node <- replace_ip(system2("hostname", stdout = TRUE))
 
   # play game
   cli::cli_h3("Playing {round_name} {conf_msg}game: {.var {matchup[1]}} VS {.var {matchup[2]}}")
@@ -185,4 +185,18 @@ compile_match_logs <- function(x) {
   })
   logs <- do.call(rbind, logs_list)
   logs[order(logs$date), ]
+}
+# Function replaces local IP addresses with fake IP address
+replace_ip <- function(hostname) {
+  # Regular expression for IPv4
+  ipv4_pattern <- "\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b"
+  # Regular expression for IPv6
+  ipv6_pattern <- "\\b(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\\b"
+
+  # Replace detected IPv4 addresses with a fake address
+  hostname <- gsub(ipv4_pattern, "192.0.2.0", hostname)
+  # Replace detected IPv6 addresses with a fake address
+  hostname <- gsub(ipv6_pattern, "2001:db8::", hostname)
+
+  hostname
 }
