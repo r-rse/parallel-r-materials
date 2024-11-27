@@ -15,7 +15,7 @@
 module load gdal/3.0.1
 module load proj/6.1.1
 module load geos/3.6.2
-module load R/4.2.1
+module load R/4.4.1
 
 cd parallel-r-materials/
 Rscript health_data/generate-maps-furrr.R 1 10
