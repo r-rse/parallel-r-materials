@@ -10,6 +10,7 @@
 #SBATCH --export=ALL,TZ=Europe/London
 #SBATCH --array=1-4
 #SBATCH --mail-type=ALL
+#SBATCH --reservation=ParallelR_Workshop  # Specify the reservation name
 
 
 # send mail to this address

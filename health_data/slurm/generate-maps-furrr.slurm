@@ -10,6 +10,7 @@
 #SBATCH --export=ALL,TZ=Europe/London
 #SBATCH --mail-type=ALL
 # send mail to this address
+#SBATCH --reservation=ParallelR_Workshop  # Specify the reservation name
 #SBATCH --mail-user=your.email@here.com
 
 module load gdal/3.0.1
