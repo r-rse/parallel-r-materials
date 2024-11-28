@@ -9,7 +9,6 @@
 #SBATCH --error=logs/R-%x.%j.err
 #SBATCH --export=ALL,TZ=Europe/London
 #SBATCH --mail-type=ALL
-#SBATCH --reservation=ParallelR_Workshop  # Specify the reservation name
 
 # send mail to this address
 #SBATCH --mail-user=youremail@here.com
