@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #SBATCH --nodes=1
-#SBATCH --ntasks=10
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=10
 #SBATCH --mem=3G
 #SBATCH --job-name=map_furrr_array
 #SBATCH --time=00:05:00
