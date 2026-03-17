@@ -13,8 +13,8 @@
 # send mail to this address
 #SBATCH --mail-user=youremail@here.com
 
-module load R/4.4.1-gcc
-module load openmpi/5.0.0/gcc
+module load R/4.4.0-gcc8
+module load openmpi/5.0.9_gcc15
 
 cd parallel-r-materials/
 Rscript nba/nba-playoffs-slurm.R
