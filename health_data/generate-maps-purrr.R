@@ -16,29 +16,30 @@ fs::dir_create(out_dir)
 # Load data ----
 health_data <- readr::read_csv(
   here::here(
-    "health_data", "data",
+    "health_data",
+    "data",
     "lsoa-general_health.csv"
   )
 )
 
 look_up <- readr::read_csv(
   here::here(
-    "health_data", "data",
+    "health_data",
+    "data",
     "output_area_lookup.csv"
   )
 )
 
 boundaries <- read_sf(
   here::here(
-    "health_data", "data",
+    "health_data",
+    "data",
     "lsoa_boundaries.geojson"
   )
 )
 
 # Merge data and validate ----
-all_data <- left_join(health_data, look_up,
-  relationship = "many-to-one"
-) %>%
+all_data <- left_join(health_data, look_up, relationship = "many-to-one") %>%
   left_join(boundaries, relationship = "many-to-one") %>%
   st_as_sf() %>%
   assert(not_na, lsoa_code, lsoa_name, lad_name, lad_code, geometry) %>%
@@ -54,9 +55,9 @@ health_cat_levels <- health_data %>%
 
 # Create addition variables obs_perc & z_score, cast gen_health_cat to factor
 all_data <- all_data %>%
-  mutate(gen_health_cat = factor(gen_health_cat,
-    levels = health_cat_levels
-  )) %>%
+  mutate(
+    gen_health_cat = factor(gen_health_cat, levels = health_cat_levels)
+  ) %>%
   group_by(lsoa_code) %>%
   mutate(obs_perc = observation / sum(observation) * 100) %>%
   ungroup() %>%
@@ -82,4 +83,6 @@ purrr::walk(
 
 cli::cli_h1("Job Complete")
 cli::cli_alert_success("{length(idx)} map{?s} written to {.path {out_dir}}.")
-cli::cli_h2("Total time elapsed: {.val {tictoc::toc(quiet = TRUE)$callback_msg}}")
+cli::cli_h2(
+  "Total time elapsed: {.val {tictoc::toc(quiet = TRUE)$callback_msg}}"
+)

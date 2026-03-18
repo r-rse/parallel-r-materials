@@ -13,7 +13,7 @@
 # send mail to this address
 #SBATCH --mail-user=youremail@here.com
 
-module load R/4.4.0-gcc8
+module load R/4.5.3-gcc8
 module load openmpi/5.0.9_gcc15
 
 cd parallel-r-materials/

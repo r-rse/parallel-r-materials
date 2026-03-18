@@ -36,7 +36,8 @@ play_round <- function(teams, nba_stats, round_name = NULL, seed = TRUE) {
   if (is.null(round_name)) {
     round_id <- as.character(length(teams))
 
-    round_name <- switch(round_id,
+    round_name <- switch(
+      round_id,
       "8" = "Conference Round 1",
       "4" = "Conference Semi finals",
       "2" = "Conference finals"
@@ -44,13 +45,15 @@ play_round <- function(teams, nba_stats, round_name = NULL, seed = TRUE) {
   }
   if (round_name == "Play off Finals") {
     conf <- NA
-    conf_msg <- ""
+    conf_label <- ""
   } else {
-    conf <- unique(nba_stats[nba_stats$slug_team %in% unlist(teams), ]$id_conference)
-    conf_msg <- paste0("(conf ", conf, ") ")
+    conf <- unique(
+      nba_stats[nba_stats$slug_team %in% unlist(teams), ]$id_conference
+    )
+    conf_label <- format_conf_label(conf)
   }
   # Signal start of round
-  cli::cli_h2("{round_name} {conf_msg}started!")
+  cli::cli_h2("{round_name} {conf_label}started!")
 
   # Create list of round pair match ups
   round_pairs <- draw_match_pairs(unlist(teams))
@@ -71,7 +74,7 @@ play_round <- function(teams, nba_stats, round_name = NULL, seed = TRUE) {
   )
 
   # Signal round completion and return results
-  cli::cli_h2("{round_name} {conf_msg}COMPLETE!")
+  cli::cli_h2("{round_name} {conf_label}COMPLETE!")
 
   return(round_winners)
 }
@@ -89,12 +92,11 @@ play_round <- function(teams, nba_stats, round_name = NULL, seed = TRUE) {
 play_match <- function(matchup, nba_stats, round_name) {
   if (round_name == "Play off Finals") {
     conf <- NA
-    conf_msg <- ""
+    conf_label <- ""
   } else {
     conf <- unique(nba_stats[nba_stats$slug_team %in% matchup, ]$id_conference)
-    conf_msg <- paste0("(conf ", conf, ") ")
+    conf_label <- format_conf_label(conf)
   }
-
 
   # Create list of probabilities for sampling game length
   probs <- list(
@@ -112,13 +114,13 @@ play_match <- function(matchup, nba_stats, round_name) {
   node <- replace_ip(system2("hostname", stdout = TRUE))
 
   # play game
-  cli::cli_h3("Playing {round_name} {conf_msg}game: {.var {matchup[1]}} VS {.var {matchup[2]}}")
+  cli::cli_h3(
+    "Playing {round_name} {conf_label}game: {.var {matchup[1]}} VS {.var {matchup[2]}}"
+  )
   cli::cli_alert_info("Game location: {.val {pid}} ({node})")
 
   # Sample game length
-  game_length <- sample(c(2.40, 2.65, 2.90, 3.15, 3.40), 1,
-    prob = prob
-  )
+  game_length <- sample(c(2.40, 2.65, 2.90, 3.15, 3.40), 1, prob = prob)
   # Send system to sleep to simulate playing match
   Sys.sleep(game_length)
 
@@ -128,9 +130,10 @@ play_match <- function(matchup, nba_stats, round_name) {
   # sample winner
   winner <- sample(match_df$slug_team, 1, prob = match_df$prop_win)
 
-
   # print messages
-  cli::cli_alert_info("{matchup[1]} VS {matchup[2]} match complete in {game_length * 50} minutes")
+  cli::cli_alert_info(
+    "{matchup[1]} VS {matchup[2]} match complete in {game_length * 50} minutes"
+  )
   cli::cli_alert_success("Winner: {winner}")
 
   # Compile match information into match logs data.frame and append as attribute.
@@ -156,13 +159,18 @@ play_match <- function(matchup, nba_stats, round_name) {
 #' @return a character vector of team slugs of qualified teams.
 play_qualifiers <- function(teams) {
   conf <- unique(teams$id_conference)
+  conf_label <- format_conf_label(conf)
   # play season
-  cli::cli_h2("Playing qualifiers for conference {.val {conf}} on {.var {Sys.getpid()}}")
+  cli::cli_h2(
+    "Playing qualifiers for {.val {conf_label}} conference on {.var {Sys.getpid()}}"
+  )
   Sys.sleep(5)
   # sample qualifiers
   qualified <- sample(teams$slug_team, 8, prob = teams$prop_win)
 
-  cli::cli_alert_success("Conference {.val {conf}} qualifying round complete")
+  cli::cli_alert_success(
+    "{.val {conf_label}} conference qualifying round complete"
+  )
 
   return(qualified)
 }
@@ -184,6 +192,10 @@ compile_match_logs <- function(x) {
   })
   logs <- do.call(rbind, logs_list)
   logs[order(logs$date), ]
+}
+# Format conference ID as a display name string e.g. "(East) " or "(West) "
+format_conf_label <- function(conf) {
+  paste0("(", c("East", "West")[conf], ") ")
 }
 # Function replaces local IP addresses with fake IP address
 replace_ip <- function(hostname) {
