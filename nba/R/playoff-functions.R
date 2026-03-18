@@ -36,7 +36,8 @@ play_round <- function(teams, nba_stats, round_name = NULL, seed = TRUE) {
   if (is.null(round_name)) {
     round_id <- as.character(length(teams))
 
-    round_name <- switch(round_id,
+    round_name <- switch(
+      round_id,
       "8" = "Conference Round 1",
       "4" = "Conference Semi finals",
       "2" = "Conference finals"
@@ -46,7 +47,9 @@ play_round <- function(teams, nba_stats, round_name = NULL, seed = TRUE) {
     conf <- NA
     conf_msg <- ""
   } else {
-    conf <- unique(nba_stats[nba_stats$slug_team %in% unlist(teams), ]$id_conference)
+    conf <- unique(
+      nba_stats[nba_stats$slug_team %in% unlist(teams), ]$id_conference
+    )
     conf_msg <- paste0("(conf ", conf, ") ")
   }
   # Signal start of round
@@ -95,7 +98,6 @@ play_match <- function(matchup, nba_stats, round_name) {
     conf_msg <- paste0("(conf ", conf, ") ")
   }
 
-
   # Create list of probabilities for sampling game length
   probs <- list(
     c(0.9452, 0.0481, 0.0057, 6e-04, 4e-04),
@@ -112,13 +114,13 @@ play_match <- function(matchup, nba_stats, round_name) {
   node <- replace_ip(system2("hostname", stdout = TRUE))
 
   # play game
-  cli::cli_h3("Playing {round_name} {conf_msg}game: {.var {matchup[1]}} VS {.var {matchup[2]}}")
+  cli::cli_h3(
+    "Playing {round_name} {conf_msg}game: {.var {matchup[1]}} VS {.var {matchup[2]}}"
+  )
   cli::cli_alert_info("Game location: {.val {pid}} ({node})")
 
   # Sample game length
-  game_length <- sample(c(2.40, 2.65, 2.90, 3.15, 3.40), 1,
-    prob = prob
-  )
+  game_length <- sample(c(2.40, 2.65, 2.90, 3.15, 3.40), 1, prob = prob)
   # Send system to sleep to simulate playing match
   Sys.sleep(game_length)
 
@@ -128,9 +130,10 @@ play_match <- function(matchup, nba_stats, round_name) {
   # sample winner
   winner <- sample(match_df$slug_team, 1, prob = match_df$prop_win)
 
-
   # print messages
-  cli::cli_alert_info("{matchup[1]} VS {matchup[2]} match complete in {game_length * 50} minutes")
+  cli::cli_alert_info(
+    "{matchup[1]} VS {matchup[2]} match complete in {game_length * 50} minutes"
+  )
   cli::cli_alert_success("Winner: {winner}")
 
   # Compile match information into match logs data.frame and append as attribute.
@@ -157,7 +160,9 @@ play_match <- function(matchup, nba_stats, round_name) {
 play_qualifiers <- function(teams) {
   conf <- unique(teams$id_conference)
   # play season
-  cli::cli_h2("Playing qualifiers for conference {.val {conf}} on {.var {Sys.getpid()}}")
+  cli::cli_h2(
+    "Playing qualifiers for conference {.val {conf}} on {.var {Sys.getpid()}}"
+  )
   Sys.sleep(5)
   # sample qualifiers
   qualified <- sample(teams$slug_team, 8, prob = teams$prop_win)
