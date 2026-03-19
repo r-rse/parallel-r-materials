@@ -162,14 +162,14 @@ play_qualifiers <- function(teams) {
   conf_label <- format_conf_label(conf)
   # play season
   cli::cli_h2(
-    "Playing qualifiers for {.val {conf_label}} conference on {.var {Sys.getpid()}}"
+    "Playing qualifiers for {conf_label} conference on {.var {Sys.getpid()}}"
   )
   Sys.sleep(5)
   # sample qualifiers
   qualified <- sample(teams$slug_team, 8, prob = teams$prop_win)
 
   cli::cli_alert_success(
-    "{.val {conf_label}} conference qualifying round complete"
+    "{conf_label} conference qualifying round complete"
   )
 
   return(qualified)
